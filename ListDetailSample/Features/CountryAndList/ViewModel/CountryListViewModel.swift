@@ -11,7 +11,7 @@ import Combine
 final class CountryListViewModel: ViewModel {
     // MARK: Public members
     var reloadData = PassthroughSubject<Bool, Never>()
-    var dataSource = [CountryCellPresentationModel]()
+    var dataSource = [CountryPresentationModel]()
     let downloadManager: DownloadManagerServicing?
 
     // MARK: Private members
@@ -40,8 +40,13 @@ final class CountryListViewModel: ViewModel {
                 guard let `self` = self else {
                     return
                 }
-                self.dataSource = list.map({ CountryCellPresentationModel(title: $0.name.official,
-                                                                          imageUrl: $0.flags.png)})
+                self.dataSource = list.sorted().map({
+                    CountryPresentationModel(name: $0.name.common,
+                                             officialName: $0.name.official,
+                                             imageUrl: $0.flags.png,
+                                             population: String($0.population),
+                                             region: $0.region.rawValue)
+                })
                 self.reloadData.send(true)
             }).store(in: &cancellable)
     }

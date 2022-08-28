@@ -33,7 +33,7 @@
 		E0383C5428BBB2EF00EE4679 /* CountryDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0383C5128BBB2EF00EE4679 /* CountryDetailViewController.storyboard */; };
 		E0383C5528BBB2EF00EE4679 /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0383C5228BBB2EF00EE4679 /* CountryListViewController.swift */; };
 		E0383C5628BBB2EF00EE4679 /* CountryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0383C5328BBB2EF00EE4679 /* CountryDetailViewController.swift */; };
-		E0383C5828BBB31500EE4679 /* CountryCellPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0383C5728BBB31500EE4679 /* CountryCellPresentationModel.swift */; };
+		E0383C5828BBB31500EE4679 /* CountryPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0383C5728BBB31500EE4679 /* CountryPresentationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +65,7 @@
 		E0383C5128BBB2EF00EE4679 /* CountryDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CountryDetailViewController.storyboard; sourceTree = "<group>"; };
 		E0383C5228BBB2EF00EE4679 /* CountryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
 		E0383C5328BBB2EF00EE4679 /* CountryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDetailViewController.swift; sourceTree = "<group>"; };
-		E0383C5728BBB31500EE4679 /* CountryCellPresentationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCellPresentationModel.swift; sourceTree = "<group>"; };
+		E0383C5728BBB31500EE4679 /* CountryPresentationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryPresentationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				E0383C4528BBB23C00EE4679 /* Country.swift */,
-				E0383C5728BBB31500EE4679 /* CountryCellPresentationModel.swift */,
+				E0383C5728BBB31500EE4679 /* CountryPresentationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -277,7 +277,7 @@
 			files = (
 				E0383C3628BBB14100EE4679 /* Routing.swift in Sources */,
 				E0383C5528BBB2EF00EE4679 /* CountryListViewController.swift in Sources */,
-				E0383C5828BBB31500EE4679 /* CountryCellPresentationModel.swift in Sources */,
+				E0383C5828BBB31500EE4679 /* CountryPresentationModel.swift in Sources */,
 				E0383C4328BBB20700EE4679 /* CountryWebService.swift in Sources */,
 				E0383C5628BBB2EF00EE4679 /* CountryDetailViewController.swift in Sources */,
 				E0383C3228BBB11600EE4679 /* DataFetchManager.swift in Sources */,

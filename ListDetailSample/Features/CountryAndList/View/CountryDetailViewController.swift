@@ -24,7 +24,6 @@ final class CountryDetailViewController: BaseViewController<CountryViewModel> {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        setupView()
         if let name = viewModel?.countryName {
             fetchCountry(countryName: name)
         }
@@ -40,12 +39,36 @@ final class CountryDetailViewController: BaseViewController<CountryViewModel> {
                 }
 
                 if reloadData {
-                    self.titleLabel.text = viewModel.viewPresentationModel?.title
-                    self.subTitleLabel.text = viewModel.viewPresentationModel?.title
-                    self.descriptionLabel.text = viewModel.viewPresentationModel?.title
+                    self.titleLabel.text = viewModel.viewPresentationModel?.officialName
+                    self.subTitleLabel.text = viewModel.viewPresentationModel?.population
+                    self.descriptionLabel.text = viewModel.viewPresentationModel?.name
+
+                    if let downloadManager = viewModel.downloader, let imageURL = viewModel.viewPresentationModel?.imageUrl {
+                        self.setup(with: imageURL, downloadManager: downloadManager)
+                    }
                     self.imageView.image = UIImage(named: "unknown")
                 }
                 self.showLoading(!reloadData)
+            }).store(in: &cancellable)
+    }
+
+    private func setup(with imageURL: String, downloadManager: DownloadManagerServicing) {
+        downloadManager.download(from: URL(string: imageURL)!)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { (completion) in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(_):
+                    self.imageView.image = UIImage(named: "unknown")
+                }
+            }, receiveValue: { [weak self] (data) in
+                guard let `self` = self else {
+                    return
+                }
+                if let data = data {
+                    self.imageView.image = UIImage(data: data)
+                }
             }).store(in: &cancellable)
     }
 
@@ -56,10 +79,6 @@ final class CountryDetailViewController: BaseViewController<CountryViewModel> {
         view.addSubview(activityIndicator)
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
-
-    private func setupView() {
-
     }
 
     private func showLoading(_ show: Bool) {
@@ -73,8 +92,8 @@ final class CountryDetailViewController: BaseViewController<CountryViewModel> {
     private func fetchCountry(countryName: String) {
         viewModel?.fetchCountry(name: countryName)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + serviceUpdateDelay) {
-            self.fetchCountry(countryName: countryName)
+        DispatchQueue.main.asyncAfter(deadline: .now() + serviceUpdateDelay) { [weak self] in
+            self?.fetchCountry(countryName: countryName)
         }
     }
 }

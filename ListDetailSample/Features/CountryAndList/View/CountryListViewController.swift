@@ -63,10 +63,10 @@ final class CountryListViewController: BaseViewController<CountryListViewModel>,
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let viewModel = viewModel?.dataSource[indexPath.row], let countryName = viewModel.title else {
+        guard let viewModel = viewModel?.dataSource[indexPath.row], let countryName = viewModel.name else {
             return
         }
-        let viewController =  viewControllerProvider.countryDetailViewController(with: countryName)
+        let viewController = viewControllerProvider.countryDetailViewController(with: countryName)
         navigationController?.pushViewController(viewController, animated: true)
     }
 

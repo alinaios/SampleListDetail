@@ -13,7 +13,7 @@ final class CountryWebService: DataFetchManager {
         return execute(parameters, errorType: Error.self)
     }
 
-    func fetch(with parameters: CountryParameter) -> AnyPublisher<Country, Error> {
+    func fetch(with parameters: CountryParameter) -> AnyPublisher<[Country], Error> {
         return execute(parameters, errorType: Error.self)
     }
 }

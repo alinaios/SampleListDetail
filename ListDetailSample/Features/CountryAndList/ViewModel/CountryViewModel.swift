@@ -11,7 +11,7 @@ import Combine
 final class CountryViewModel: ViewModel {
     // MARK: Public members
     var reloadData = PassthroughSubject<Bool, Never>()
-    var viewPresentationModel: CountryCellPresentationModel?
+    var viewPresentationModel: CountryPresentationModel?
     let downloader: DownloadManagerServicing?
     let countryName: String
 
@@ -38,12 +38,17 @@ final class CountryViewModel: ViewModel {
                 case .failure(let error):
                     self.handleError(error)
                 }
-            }, receiveValue: { [weak self] (countryEntity) in
+            }, receiveValue: { [weak self] (list) in
                 guard let `self` = self else {
                     return
                 }
-                self.viewPresentationModel = CountryCellPresentationModel(title: countryEntity.name.official,
-                                                                          imageUrl: countryEntity.flags.png)
+                if let aCountry = list.first {
+                    self.viewPresentationModel = CountryPresentationModel(name: aCountry.name.common.lowercased(),
+                                                                      officialName: aCountry.name.official,
+                                                                      imageUrl: aCountry.flags.png,
+                                                                      population: String(aCountry.population),
+                                                                      region: aCountry.region.rawValue)
+                }
                 self.reloadData.send(true)
             }).store(in: &cancellable)
     }

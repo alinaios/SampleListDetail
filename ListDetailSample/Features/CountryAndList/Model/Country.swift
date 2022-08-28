@@ -362,3 +362,13 @@ enum Status: String, Codable {
     case officiallyAssigned = "officially-assigned"
     case userAssigned = "user-assigned"
 }
+
+extension Country: Comparable {
+    static func < (lhs: Country, rhs: Country) -> Bool {
+        lhs.name.common < rhs.name.common
+    }
+
+    static func == (lhs: Country, rhs: Country) -> Bool {
+        lhs.name.common == rhs.name.common
+    }
+}

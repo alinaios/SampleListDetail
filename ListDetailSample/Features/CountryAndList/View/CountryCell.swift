@@ -12,7 +12,7 @@ final class CountryCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var flagView: UIImageView!
 
-    private var presentationModel: CountryCellPresentationModel?
+    private var presentationModel: CountryPresentationModel?
     private var downloader: DownloadManagerServicing!
     private var cancellable = Set<AnyCancellable>()
 
@@ -24,10 +24,10 @@ final class CountryCell: UITableViewCell {
         }
     }
 
-    func setup(with model: CountryCellPresentationModel, downloadManager: DownloadManagerServicing) {
+    func setup(with model: CountryPresentationModel, downloadManager: DownloadManagerServicing) {
         presentationModel = model
         downloader = downloadManager
-        titleLabel.text = model.title
+        titleLabel.text = model.name
 
         if let url = model.imageUrl {
             downloadManager.download(from: URL(string: url)!)

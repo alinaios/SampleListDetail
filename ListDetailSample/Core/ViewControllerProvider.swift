@@ -31,7 +31,7 @@ final class ViewControllerProvider {
                 as? CountryDetailViewController else {
             fatalError("viewController was not an instance of CountryDetailViewController")
         }
-        let viewModel = CountryViewModel(with: "peru",
+        let viewModel = CountryViewModel(with: name,
                                          webService: CountryWebService(with: sessionManager),
                                          downloadManager: downloadManager)
         viewController.viewModel = viewModel
